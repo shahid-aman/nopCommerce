@@ -116,3 +116,17 @@ GO
 DELETE FROM [Setting]
 WHERE [Name] = N'externalauthenticationsettings.autoregisterenabled'
 GO
+
+--drop column
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id=object_id('[ScheduleTask]') and NAME='LeasedByMachineName')
+BEGIN
+	ALTER TABLE [ScheduleTask] DROP COLUMN [LeasedByMachineName]
+END
+GO
+
+--drop column
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id=object_id('[ScheduleTask]') and NAME='LeasedUntilUtc')
+BEGIN
+	ALTER TABLE [ScheduleTask] DROP COLUMN [LeasedUntilUtc]
+END
+GO
